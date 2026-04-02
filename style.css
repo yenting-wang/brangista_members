@@ -486,9 +486,9 @@ body {
   border: 2.5px solid var(--navy);
 }
 
-.modal-name-jp      { font-size: 34px; font-weight: 700; }
-.modal-name-reading { font-size: 24px; color: #555; margin-top: 4px; }
-.modal-grade        { font-size: 24px; font-weight: 700; margin-top: 8px; }
+.modal-name-jp      { font-size: 26px; font-weight: 700; }
+.modal-name-reading { font-size: 18px; color: #555; margin-top: 4px; }
+.modal-grade        { font-size: 18px; font-weight: 700; margin-top: 8px; }
 
 .modal-info-list {
   list-style: none;
@@ -499,7 +499,7 @@ body {
   width: 100%;
 }
 .modal-info-list li {
-  font-size: 24px;
+  font-size: 19px;
   line-height: 1.5;
   padding-left: 1em;
   text-indent: -1em;
@@ -507,7 +507,7 @@ body {
 .modal-info-list li::before { content: '・'; }
 
 .modal-right { display: flex; flex-direction: column; gap: 8px; }
-.modal-fav-label { font-size: 24px; font-weight: 700; }
+.modal-fav-label { font-size: 18px; font-weight: 700; }
 .modal-fav-photo {
   width: 100%;
   height: auto;
