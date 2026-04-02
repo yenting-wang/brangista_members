@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>制作チーム紹介</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== HOME SCREEN ==================== -->
+  <div id="home-screen" class="screen active">
+    <div class="home-text-group">
+      <p class="home-company">ブランジスタソリューション 渋谷本社</p>
+      <h1 class="home-title">制作チーム紹介</h1>
+    </div>
+    <div class="folder-row" id="folder-row">
+      <!-- フォルダは app.js が生成 -->
+    </div>
+  </div>
+
+  <!-- ==================== TEAM SCREEN ==================== -->
+  <div id="team-screen" class="screen">
+    <div class="team-header">
+      <button class="back-btn" id="back-btn">← 戻る</button>
+      <h2 class="team-heading" id="team-heading"></h2>
+    </div>
+    <div class="member-grid" id="member-grid">
+      <!-- カードは app.js が生成 -->
+    </div>
+  </div>
+
+  <!-- ==================== MODAL ==================== -->
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div id="modal-window" class="modal-window" role="dialog" aria-modal="true">
+      <!-- app.js が中身を生成 -->
+    </div>
+  </div>
+
+  <script src="members.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

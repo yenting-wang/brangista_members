@@ -1,0 +1,570 @@
+/* ============================================================
+   制作チーム紹介 — Retro Windows OS Style
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink-bg:     #FFD6E8;
+  --grid-line:   #FFC0DC;
+  --navy:        #2D3561;
+  --white:       #FFFFFF;
+  --card-bg:     #F8F8F8;
+
+  --designer-bar: #FF6BAE;
+  --engineer-bar: #8B9DC3;
+  --data-bar:     #C8963A;
+
+  --font-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: var(--font-jp);
+  color: var(--navy);
+  cursor: default;
+  user-select: none;
+}
+
+/* ---------- Pink Grid Background ---------- */
+body {
+  background-color: var(--pink-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ---------- Page Screens ---------- */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ============================================================
+   HOME SCREEN
+   ============================================================ */
+#home-screen {
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  padding: 60px 24px;
+}
+
+.home-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-company {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.home-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.folder-row {
+  display: flex;
+  gap: clamp(32px, 6vw, 80px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---------- Folder Icon ---------- */
+.folder-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  transition: transform 0.12s, filter 0.12s;
+}
+.folder-btn:hover  { transform: translateY(-4px); filter: brightness(1.05); }
+.folder-btn:active { transform: translateY(0); }
+
+.folder-icon {
+  width: 110px;
+  height: 90px;
+  position: relative;
+}
+
+/* folder tab */
+.folder-icon::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 12px;
+  width: 40px; height: 14px;
+  border-radius: 6px 6px 0 0;
+  background: inherit;
+  filter: brightness(0.88);
+}
+
+/* folder body */
+.folder-body {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 76px;
+  border-radius: 4px 8px 8px 8px;
+  border: 2.5px solid var(--navy);
+  box-shadow: 3px 3px 0 var(--navy);
+}
+
+/* gradient fill per team */
+.folder-btn[data-team="designer"] .folder-body { background: linear-gradient(160deg, #FFB3D4 0%, #FF6BAE 100%); }
+.folder-btn[data-team="designer"]::before,
+.folder-btn[data-team="designer"] .folder-icon::before { background: #FF6BAE; }
+
+.folder-btn[data-team="engineer"] .folder-body { background: linear-gradient(160deg, #BDC9E8 0%, #8B9DC3 100%); }
+.folder-btn[data-team="engineer"] .folder-icon::before { background: #8B9DC3; }
+
+.folder-btn[data-team="data"] .folder-body { background: linear-gradient(160deg, #F0D080 0%, #D4A040 100%); }
+.folder-btn[data-team="data"] .folder-icon::before { background: #D4A040; }
+
+.folder-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   TEAM SCREEN
+   ============================================================ */
+#team-screen {
+  padding: 32px 24px 60px;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* ---------- Team Header ---------- */
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px 6px 10px;
+  background: var(--white);
+  border: 2px solid var(--navy);
+  border-radius: 4px;
+  font-family: var(--font-jp);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--navy);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.back-btn:hover  { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--navy); }
+.back-btn:active { transform: translate(1px,1px);  box-shadow: 1px 1px 0 var(--navy); }
+
+.team-heading {
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Member Grid ---------- */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+  width: 100%;
+}
+
+/* ============================================================
+   MEMBER WINDOW CARD
+   ============================================================ */
+.win-card {
+  background: var(--white);
+  border: 2.5px solid var(--navy);
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 var(--navy);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.win-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--navy);
+}
+
+/* --- Title Bar --- */
+.win-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  min-height: 30px;
+}
+
+.win-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.win-controls {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.win-btn {
+  width: 18px;
+  height: 16px;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  background: transparent;
+  color: var(--white);
+  font-size: 9px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  border-radius: 1px;
+}
+
+/* --- Card Body (inner frame) --- */
+.win-body {
+  display: flex;
+  flex: 1;
+  border-top: 2.5px solid var(--navy);
+}
+
+.win-content {
+  flex: 1;
+  padding: 14px;
+  border: 3px solid var(--white);
+  outline: 2px solid var(--navy);
+  margin: 6px 0 6px 6px;
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* --- Decorative Scrollbar --- */
+.win-scrollbar {
+  width: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  margin: 6px 6px 6px 4px;
+  gap: 3px;
+}
+
+.scroll-arrow {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--navy);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.scroll-track {
+  flex: 1;
+  width: 16px;
+  background: #e0e0e0;
+  border: 1.5px solid var(--navy);
+  position: relative;
+  min-height: 20px;
+}
+
+.scroll-thumb {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: var(--white);
+  border: 1.5px solid var(--navy);
+}
+
+/* --- Member Header (avatar + name) --- */
+.member-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--navy);
+}
+
+.member-names {
+  min-width: 0;
+}
+
+.name-jp {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.name-reading {
+  font-size: 12px;
+  color: #555;
+  margin-top: 2px;
+}
+
+/* --- Member Info --- */
+.member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.grade-badge {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.info-list li {
+  font-size: 12.5px;
+  line-height: 1.5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.info-list li::before {
+  content: '・';
+}
+
+/* --- Favorite Photo --- */
+.fav-section { display: flex; flex-direction: column; gap: 6px; }
+
+.fav-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.fav-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--navy);
+}
+
+/* ============================================================
+   COLOR THEMING PER TEAM
+   ============================================================ */
+.win-card.designer .win-titlebar { background: var(--designer-bar); }
+.win-card.designer .scroll-thumb { background: var(--designer-bar); opacity: 0.5; }
+
+.win-card.engineer .win-titlebar { background: var(--engineer-bar); }
+.win-card.engineer .scroll-thumb { background: var(--engineer-bar); opacity: 0.5; }
+
+.win-card.data .win-titlebar { background: var(--data-bar); }
+.win-card.data .scroll-thumb { background: var(--data-bar); opacity: 0.5; }
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fade-in 0.15s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-window {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--white);
+  border: 2.5px solid var(--navy);
+  box-shadow: 6px 6px 0 var(--navy);
+  border-radius: 2px;
+  animation: pop-in 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  scrollbar-width: none;
+}
+.modal-window::-webkit-scrollbar { display: none; }
+
+@keyframes pop-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+/* --- Modal inner card --- */
+.modal-window .win-card {
+  border: none;
+  box-shadow: none;
+  transform: none !important;
+  cursor: default;
+}
+
+.modal-window .win-titlebar { position: sticky; top: 0; z-index: 1; }
+.modal-window .win-btn.close-btn { cursor: pointer; }
+.modal-window .win-btn.close-btn:hover { background: rgba(255,255,255,0.3); }
+
+/* --- Modal 2-column body (PC) --- */
+.modal-body-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+.modal-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.modal-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--navy);
+}
+
+.modal-name-jp      { font-size: 34px; font-weight: 700; }
+.modal-name-reading { font-size: 24px; color: #555; margin-top: 4px; }
+.modal-grade        { font-size: 24px; font-weight: 700; margin-top: 8px; }
+
+.modal-info-list {
+  list-style: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+.modal-info-list li {
+  font-size: 24px;
+  line-height: 1.5;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+.modal-info-list li::before { content: '・'; }
+
+.modal-right { display: flex; flex-direction: column; gap: 8px; }
+.modal-fav-label { font-size: 24px; font-weight: 700; }
+.modal-fav-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 2px solid var(--navy);
+}
+
+/* PC: 横長2カラム */
+@media (min-width: 600px) {
+  .modal-window {
+    max-width: 860px;
+  }
+
+  .modal-body-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 28px;
+  }
+
+  .modal-left {
+    flex: 0 0 260px;
+    align-items: center;
+  }
+
+  .modal-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .modal-name-jp      { font-size: 36px; }
+  .modal-name-reading { font-size: 22px; }
+  .modal-grade        { font-size: 20px; margin-top: 8px; }
+  .modal-info-list li { font-size: 18px; gap: 6px; }
+  .modal-fav-label    { font-size: 18px; }
+
+  .modal-right {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .modal-fav-photo {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* カードはクリック可能に見せる */
+.win-card { cursor: pointer; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  #team-screen { padding: 20px 14px 40px; }
+  .member-grid { grid-template-columns: 1fr; gap: 20px; }
+  .folder-row { gap: 24px; }
+  .folder-icon { width: 88px; height: 72px; }
+  .folder-body { height: 60px; }
+}
