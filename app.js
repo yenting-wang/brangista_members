@@ -54,7 +54,7 @@ TEAMS.forEach(team => {
 });
 
 // ---------- チーム画面を表示 ----------
-function showTeam(team) {
+function showTeam(team, pushHash = true) {
   teamHeading.textContent = team.labelJp;
   teamHeading.style.color = team.color;
 
@@ -66,7 +66,24 @@ function showTeam(team) {
   homeScreen.classList.remove('active');
   teamScreen.classList.add('active');
   window.scrollTo(0, 0);
+
+  if (pushHash) location.hash = team.id;
 }
+
+// ---------- ハッシュに応じて画面を切り替え ----------
+function handleHash() {
+  const hash = location.hash.replace('#', '');
+  const team = TEAMS.find(t => t.id === hash);
+  if (team) {
+    showTeam(team, false);
+  } else {
+    teamScreen.classList.remove('active');
+    homeScreen.classList.add('active');
+  }
+}
+
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('DOMContentLoaded', handleHash);
 
 // ---------- 一覧カード生成（小さいカード用）----------
 function buildCard(m, teamId) {
@@ -165,8 +182,7 @@ function buildModalCard(m, teamId) {
 
 // ---------- 戻るボタン ----------
 backBtn.addEventListener('click', () => {
-  teamScreen.classList.remove('active');
-  homeScreen.classList.add('active');
+  location.hash = '';
   window.scrollTo(0, 0);
 });
 
